@@ -1,9 +1,10 @@
-SUVR : standard uptake value ratio
+SUVR : Standard Uptake Value Ratio
 
-----------------------------------
+----------------------------------------------------------------------
 
-Imaging Modality - PET (ADNI2)
+Imaging Modality - PET (ADNI 2)
 
-s1: normalized target, reference and source images
+s1: normal target, reference and source images
 
+s2: script to get all the target AAL regions
 
