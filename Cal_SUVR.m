@@ -90,7 +90,7 @@ for s=1:size(filesref,1);
     %write output
     [pathinp,namepet,extpet]=fileparts(controlpet);
     [pathstr,nameref,ext] = fileparts(REF);
-    outputfilenameSUVR=[namepet nameref 'SUVR.txt'];
+    outputfilenameSUVR=[namepet '3_Output' nameref 'SUVR.txt'];
     %outputfilenametarvx=[namepet nameref 'tarvx.txt'];
     %outputfilenamerefvx=[namepet nameref 'refvx.txt'];
     SUVRT = cell2table(num2cell(SUVR),'VariableNames',rowheader,'RowNames',colheader);
