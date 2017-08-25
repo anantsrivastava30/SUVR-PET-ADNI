@@ -1,2 +1,0 @@
-Row,sample
-sample.nii,1

@@ -1,1 +1,4 @@
-aal.nii
+./2_Reference/TParietal_Inf_L.nii
+./2_Reference/TParietal_Inf_R.nii
+./2_Reference/TParietal_Sup_L.nii
+./2_Reference/TParietal_Sup_R.nii
