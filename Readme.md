@@ -11,3 +11,5 @@ s2: script to get all the target AAL regions.
 s3: inculded 116 AAL parcellations.
 
 s4: dot product now makes data matrix Data
+
+s5: change of aal template now reduced to integer values.
