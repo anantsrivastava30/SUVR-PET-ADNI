@@ -13,3 +13,5 @@ s3: inculded 116 AAL parcellations.
 s4: dot product now makes data matrix Data
 
 s5: change of aal template now reduced to integer values.
+
+s6: 286 Features complete mean, std and difference b/w 54 pairs
