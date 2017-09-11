@@ -55,14 +55,14 @@ for i = 1 : length(PETList)
         Data(i,j) = std(v);
     %break
     end
-    off = length(MaskList)
+    off = length(MaskList);
     for j = 2 * off + 1: 2 * off  + 54
         Data(i,j) = Data(i, 2 * (j - 2 * off) - 1) -  Data(i, 2 * (j - 2 * off));
     end
 disp(i)
 %break
 end
-Data = Data(:,1:232);
+
 save('X.mat','Data')
 %dlmwrite('FM.txt',Data,' ');
 %image.img = img_new;
