@@ -5,8 +5,7 @@ from sklearn.ensemble import RandomTreesEmbedding
 from sklearn.model_selection import KFold
 from os import listdir
 from sklearn.metrics import classification_report
-from collections import defaultdict
-#d = defaultdict(list)
+
 ## labels for the data
 dic = pickle.load(open('letterdict_normalized.pickle'));
 mypath = '/home/asriva20/SrivastavaA/Data/3_AD_Normal/'
@@ -20,29 +19,20 @@ mat = sio.loadmat('X.mat')
 X = mat['Data']
 print np.shape(X)
 
-forest = RandomTreesEmbedding(n_estimators=100, max_depth=3, random_state=0)
+forest = RandomTreesEmbedding(n_estimators=50, max_depth=3)
 forest.fit(X)
-
-count = 1
-
-# for each decision tree in forest we want to find the values in all
-# the leaf nodes. after that we must have meu_m = {- 1,...,L, + 1,...,L}
-# TODO! assumption : the odd numbered leaves are - and vice versa  
- 
+print(forest.apply(X))
+sum=0
 for tree in forest.estimators_:
     n_nodes = tree.tree_.node_count
     children_left = tree.tree_.children_left
     children_right = tree.tree_.children_right
     feature = tree.tree_.feature
     threshold = tree.tree_.threshold   
-    
-    leaf_nodes = tree.apply(X)
-    node_dict = defaultdict(list)
-    
+ 
     node_depth = np.zeros(shape=n_nodes)
     is_leaves = np.zeros(shape=n_nodes, dtype=bool)
     parent_id = {}
-   
     # seed is root node and id is parent depth
     stack = [(0, -1)]
  
@@ -57,27 +47,39 @@ for tree in forest.estimators_:
         else:
             is_leaves[node_id] = True
     
+    print("The binary tree structure has %s nodes and has  the following tree structure:"% n_nodes)
 
     pos = []
     neg = []
     label=[]
-    {node_dict[leaf_nodes[i]].append(i) for i in range(len(leaf_nodes))}
-       
+    for i in range(n_nodes):
+        if is_leaves[i]:
+            if i == children_left[parent_id[i]]:
+                label.append(1)
+#                pos.append(X[feature[i])
+                print("left child")
+            else:
+                label.append(-1)
+                neg.append(feature[i]) 
+                print("right child")
+            print("%snode=%s leaf node." % (node_depth[i] * "\n", i))
+        else:
+            print("%snode=%s test node: go to node %s if X[:, %s] <= %s else to node %s."
+              % (node_depth[i] * "\n",
+                 i,
+                 children_left[i],
+                 feature[i],
+                 threshold[i],
+                 children_right[i],
+                 ))
+    np_pos = np.array(pos)
+    np_neg = np.array(neg)
+    pos_mean = np.mean(np_pos)
+    neg_mean = np.mean(np_neg)
+    print(pos_mean,neg_mean)
+    print(np.cov(np_pos).shape)
     
-    if len(node_dict.keys()) == 8:
-        val = [ len(node_dict[n]) for n in node_dict.keys()]
-        print node_dict.keys(), count, sum(val)
-        count += 1 
-    
 
-
-
-
-
-
-
-
-
-
-
+    #print()
+    break
 

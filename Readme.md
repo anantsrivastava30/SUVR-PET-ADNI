@@ -1,5 +1,4 @@
-SUVR : Standard Uptake Value Ratio
-
+Random Forest w/ AAL parcellation  
 ----------------------------------------------------------------------
 
 Imaging Modality - PET (ADNI 2)
