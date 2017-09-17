@@ -15,4 +15,6 @@ s5: change of aal template now reduced to integer values.
 
 s6: 286 Features complete mean, std and difference b/w 54 pairs
 
-s7: preliminary analysis 
+s7: preliminary analysis
+
+s8: features transformed by incomplete random forest.   http://www.sciencedirect.com/science/article/pii/S0895611117300010#! 
