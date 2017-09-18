@@ -11,15 +11,21 @@ from collections import defaultdict
 dic = pickle.load(open('letterdict_normalized.pickle'));
 mypath = '/home/asriva20/SrivastavaA/Data/3_AD_Normal/'
 names = [name for name in sorted(listdir(mypath))]
+
 Y = [1 if n[2:8] in dic['AD'] else \
-     0 if n[2:8] in  dic['Normal'] else \
-    -1 for n in names]
+     -1 if n[2:8] in  dic['Normal'] else \
+    0 for n in names]
 Y = np.asarray(Y)
 
 mat = sio.loadmat('X.mat')
 X = mat['Data']
-print np.shape(X)
+
+gamma = np.zeros((51,8))
+n_pos = len([n for n in Y if n == 1])
+n_neg = len([n for n in Y if n == -1]) 
 X_transformed = np.zeros((51,16))
+
+print np.shape(X), n_pos, n_neg
 
 # estimators fixed from 50 to 100 to 400, we force the tree to have atleat 2 elements at the 
 # leaf as there is a numerical error when calculating the covarience of a single element! 
@@ -82,12 +88,14 @@ for tree in forest.estimators_:
                mu_m[pos] = mu
                sigma_m[pos] = sigma
                label_m[pos] = 1
-               # print mu, pos 
+               # print mu, pos
+               gamma[count, pos] = float(len([n for n in node_dict[leaf] if Y[n] == 1]))/n_pos
                pos += 1
            else: 
                mu_m[neg] = mu
                sigma_m[neg] = sigma
                label_m[neg] = -1
+               gamma[count, neg] = float(len([n for n in node_dict[leaf] if Y[n] == -1]))/n_neg
                # print mu, neg 
                neg += 1
         
@@ -95,9 +103,9 @@ for tree in forest.estimators_:
         X_transformed[count, 8:16] = sigma_m
 
         count += 1 
-print X_transformed[0] 
-   
-
+print gamma
+       
+# processing the transformaed data
 
 
 
