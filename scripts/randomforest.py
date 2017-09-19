@@ -104,7 +104,9 @@ for tree in forest.estimators_:
 
         count += 1 
 print gamma
-       
+
+sio.savemat('X\'.mat', {'X_mu_sigma':X_transformed})       
+sio.savemat('gamma.mat', {'gamma':gamma})       
 # processing the transformaed data
 
 
