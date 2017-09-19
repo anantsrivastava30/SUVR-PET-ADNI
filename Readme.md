@@ -18,3 +18,5 @@ s6: 286 Features complete mean, std and difference b/w 54 pairs
 s7: preliminary analysis
 
 s8: features transformed by incomplete random forest.   http://www.sciencedirect.com/science/article/pii/S0895611117300010#! 
+
+s9: exported all variables to play around with CVX matlab.
