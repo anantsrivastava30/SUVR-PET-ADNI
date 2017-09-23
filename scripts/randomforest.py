@@ -17,13 +17,14 @@ Y = [1 if n[2:8] in dic['AD'] else \
     0 for n in names]
 Y = np.asarray(Y)
 
-mat = sio.loadmat('X.mat')
+mat = sio.loadmat('./data/X.mat')
 X = mat['Data']
 
 gamma = np.zeros((51,8))
 n_pos = len([n for n in Y if n == 1])
 n_neg = len([n for n in Y if n == -1]) 
 X_transformed = np.zeros((51,16))
+Y_transformed = np.zeros((51,8))
 
 print np.shape(X), n_pos, n_neg
 
@@ -101,12 +102,13 @@ for tree in forest.estimators_:
         
         X_transformed[count, 0:8] = mu_m
         X_transformed[count, 8:16] = sigma_m
-
+        Y_transformed[count,0:8] = label_m
         count += 1 
-print gamma
+print Y_transformed 
 
-sio.savemat('X\'.mat', {'X_mu_sigma':X_transformed})       
-sio.savemat('gamma.mat', {'gamma':gamma})       
+sio.savemat('./data/X_T.mat', {'X_T':X_transformed})       
+sio.savemat('./data/gamma.mat', {'gamma':gamma})       
+sio.savemat('./data/Y_T.mat', {'Y_T':Y_transformed})
 # processing the transformaed data
 
 

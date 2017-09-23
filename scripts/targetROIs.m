@@ -2,7 +2,7 @@ clear;
 marsbar('on');
 
 % Basing the root to this directory
-xDoc = xmlread('./AAL.xml');
+xDoc = xmlread('./data/AAL.xml');
 
 labels = xDoc.getElementsByTagName('label');
 

@@ -63,7 +63,7 @@ disp(i)
 %break
 end
 
-save('X.mat','Data')
+save('./data/X.mat','Data')
 %dlmwrite('FM.txt',Data,' ');
 %image.img = img_new;
 %save_untouch_nii(image,outFile);
